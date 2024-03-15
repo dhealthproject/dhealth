@@ -1,0 +1,12 @@
+syntax = "proto3";
+package dhealth.dhealth;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/dhealthproject/dhealth/x/dhealth/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

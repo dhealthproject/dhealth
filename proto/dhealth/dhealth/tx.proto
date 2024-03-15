@@ -1,0 +1,7 @@
+syntax = "proto3";
+package dhealth.dhealth;
+
+option go_package = "github.com/dhealthproject/dhealth/x/dhealth/types";
+
+// Msg defines the Msg service.
+service Msg {}

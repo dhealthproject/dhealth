@@ -1,0 +1,12 @@
+syntax = "proto3";
+package dhealth.dhealth;
+
+import "gogoproto/gogo.proto";
+import "dhealth/dhealth/params.proto";
+
+option go_package = "github.com/dhealthproject/dhealth/x/dhealth/types";
+
+// GenesisState defines the dhealth module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
