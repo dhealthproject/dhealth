@@ -44,6 +44,8 @@ import (
 
 	"github.com/dhealthproject/dhealth/app"
 	appparams "github.com/dhealthproject/dhealth/app/params"
+
+	"github.com/cosmos/cosmos-sdk/client/snapshot"
 )
 
 // NewRootCmd creates a new root command for a Cosmos SDK application
@@ -111,6 +113,11 @@ func initRootCmd(
 	initSDKConfig()
 
 	gentxModule := app.ModuleBasics[genutiltypes.ModuleName].(genutil.AppModuleBasic)
+
+	a := appCreator{
+		encodingConfig,
+	}
+
 	rootCmd.AddCommand(
 		genutilcli.InitCmd(app.ModuleBasics, app.DefaultNodeHome),
 		genutilcli.CollectGenTxsCmd(banktypes.GenesisBalancesIterator{}, app.DefaultNodeHome, gentxModule.GenTxValidator),
@@ -126,12 +133,9 @@ func initRootCmd(
 		tmcli.NewCompletionCmd(rootCmd, true),
 		debug.Cmd(),
 		config.Cmd(),
+		snapshot.Cmd(a.newApp),
 		// this line is used by starport scaffolding # root/commands
 	)
-
-	a := appCreator{
-		encodingConfig,
-	}
 
 	// add server commands
 	server.AddCommands(
